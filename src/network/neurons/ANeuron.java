@@ -32,6 +32,8 @@ public abstract class ANeuron implements INeuron{
         this.input += i;
     }
 
+    
+
     @Override
     public double getOutput() {
         return this.output;

@@ -5,9 +5,13 @@ package network.neurons;
  */
 public class SigmaNeuron extends ANeuron {
 
+    public double sigmaFunction(double input){
+        return 1/(Math.exp(getInput() * (-1))+1);
+    }
+
     @Override
     public void feedToActivationFunction() {
-        this.output = 1/(Math.exp(getInput() * (-1))+1);
+        this.output = sigmaFunction(this.getInput());
     }
 
     @Override
