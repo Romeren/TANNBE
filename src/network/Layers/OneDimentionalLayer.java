@@ -7,10 +7,10 @@ import java.util.ArrayList;
 /**
  * Created by EmilSebastian on 17-03-2016.
  */
-public class OneDimentional implements ILayer{
+public class OneDimentionalLayer implements ILayer{
     private ArrayList<INeuron> neurons = new ArrayList<>();
 
-    public OneDimentional(){
+    public OneDimentionalLayer(){
 
     }
 

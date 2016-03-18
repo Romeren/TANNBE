@@ -8,7 +8,7 @@ public class LayerFactory {
     public static ILayer createLayer(LayerTypes type){
         switch (type){
             case ONE_DIMENTIONAL:
-                return new OneDimentional();
+                return new OneDimentionalLayer();
             case TWO_DIMENTIONAL:
                 return null;
         }
