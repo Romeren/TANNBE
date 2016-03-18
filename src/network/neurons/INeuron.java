@@ -8,6 +8,7 @@ public interface INeuron {
     void resetNeuron();
     void addInput(double i);
     void feedForward();
+    void feedToActivationFunction();
     void backpropagate();
     double getOutput();
 }

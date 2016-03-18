@@ -28,11 +28,11 @@ public abstract class AConnection implements  IConnection{
 
     @Override
     public void feedForward(double input) {
-
+        this.end.addInput(input * this.weight);
     }
 
     @Override
     public void feedBackwards(double input) {
-
+        this.start.addInput(input * this.weight);
     }
 }
