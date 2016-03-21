@@ -46,4 +46,8 @@ public class RBMNeuron extends SigmaNeuron implements IBackwardsFeed {
             con.unsupervizedRBM();
         }
     }
+
+    public double getBias(){
+        return this.bias;
+    }
 }

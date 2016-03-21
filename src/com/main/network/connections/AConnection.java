@@ -29,6 +29,11 @@ public abstract class AConnection implements  IConnection {
     }
 
     @Override
+    public double getWeight() {
+        return this.weight;
+    }
+
+    @Override
     public INeuron getStart() {
         return this.start;
     }

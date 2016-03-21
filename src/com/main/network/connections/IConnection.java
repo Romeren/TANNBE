@@ -13,4 +13,5 @@ public interface IConnection {
     INeuron getStart();
     INeuron getEnd();
     void unsupervizedRBM();
+    double getWeight();
 }
