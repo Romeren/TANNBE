@@ -1,12 +1,20 @@
 package network.neurons;
 
+import network.Network.NetworkConfiguration;
+import network.RandomUtilz;
+import network.connections.IConnection;
+
 import java.util.Random;
 
 /**
  * Created by EmilSebastian on 18-03-2016.
  */
 public class LinearNeuron extends ANeuron {
-    private  final float bias = new Random().nextFloat();
+    private  final double bias = RandomUtilz.getDoubleInRange(NetworkConfiguration.minimumInitializedLinearBias, NetworkConfiguration.maximumInitializedLinearBias);
+
+    public LinearNeuron() {
+        super();
+    }
 
     @Override
     public void feedToActivationFunction() {
@@ -15,6 +23,8 @@ public class LinearNeuron extends ANeuron {
 
     @Override
     public void backpropagate() {
-
+        for (IConnection con : this.backwardsConnections){
+            con.backpropagate();
+        }
     }
 }

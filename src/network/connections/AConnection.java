@@ -7,8 +7,8 @@ import network.neurons.INeuron;
  */
 public abstract class AConnection implements  IConnection{
     private static final double UNCHANGEDUPDATEDWEIGHT = Double.MIN_VALUE;
-    private double weight;
-    private double updatedWeight = UNCHANGEDUPDATEDWEIGHT;
+    protected double weight;
+    protected double updatedWeight = UNCHANGEDUPDATEDWEIGHT;
     private INeuron start;
     private INeuron end;
 
@@ -24,6 +24,16 @@ public abstract class AConnection implements  IConnection{
             this.weight = updatedWeight;
             this.updatedWeight = UNCHANGEDUPDATEDWEIGHT;
         }
+    }
+
+    @Override
+    public INeuron getStart() {
+        return this.start;
+    }
+
+    @Override
+    public INeuron getEnd() {
+        return this.end;
     }
 
     @Override

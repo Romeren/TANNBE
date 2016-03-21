@@ -9,9 +9,11 @@ import java.util.ArrayList;
  */
 public abstract class ANeuron implements INeuron{
     private double input;
+    protected double error;
     protected double output;
     protected ArrayList<IConnection> backwardsConnections;
     protected ArrayList<IConnection> forwardsConnections;
+
 
     public ANeuron(){
         this.backwardsConnections = new ArrayList<>();
@@ -19,12 +21,28 @@ public abstract class ANeuron implements INeuron{
     }
 
     @Override
+    public double getError() {
+        return this.error;
+    }
+
+    @Override
     public void resetNeuron() {
         this.input = 0;
         this.output = 0;
+        this.error = 0;
         for (IConnection con : forwardsConnections){
             con.resetValues();
         }
+    }
+
+    @Override
+    public void startBackpropagate(double targetValue) {
+        this.error = (targetValue -this.getOutput());
+    }
+
+    @Override
+    public void addBackpropagationError(double propagatedError) {
+        this.error+=propagatedError;
     }
 
     @Override
@@ -48,9 +66,20 @@ public abstract class ANeuron implements INeuron{
         }
     }
 
+    @Override
+    public ArrayList<IConnection> getForwardConnections() {
+        return this.forwardsConnections;
+    }
+
+    @Override
+    public ArrayList<IConnection> getBackwardsConnections() {
+        return  this.backwardsConnections;
+    }
+
     protected double getInput(){
         return this.input;
     }
+
 
 
 }

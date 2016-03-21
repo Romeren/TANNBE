@@ -1,6 +1,7 @@
 package network.Layers;
 
 import network.neurons.INeuron;
+import network.neurons.NeuronTypes;
 
 import java.util.ArrayList;
 
@@ -9,9 +10,25 @@ import java.util.ArrayList;
  */
 public class OneDimentionalLayer implements ILayer{
     private ArrayList<INeuron> neurons = new ArrayList<>();
+    private NeuronTypes neuronTypes;
 
     public OneDimentionalLayer(){
 
+    }
+
+    @Override
+    public NeuronTypes getNeuronType() {
+        return this.neuronTypes;
+    }
+
+    @Override
+    public void setNeuronType(NeuronTypes type) {
+        this.neuronTypes = type;
+    }
+
+    @Override
+    public ArrayList<INeuron> getNeurons() {
+        return this.neurons;
     }
 
     @Override
@@ -49,5 +66,10 @@ public class OneDimentionalLayer implements ILayer{
         for (INeuron n : neurons){
             n.backpropagate();
         }
+    }
+
+    @Override
+    public void addNeuron(INeuron neuron) {
+        this.neurons.add(neuron);
     }
 }

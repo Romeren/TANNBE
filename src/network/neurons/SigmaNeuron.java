@@ -1,5 +1,7 @@
 package network.neurons;
 
+import network.connections.IConnection;
+
 /**
  * Created by EmilSebastian on 18-03-2016.
  */
@@ -16,6 +18,9 @@ public class SigmaNeuron extends ANeuron {
 
     @Override
     public void backpropagate() {
-
+        this.error = this.getOutput() * (1-this.getOutput()) * this.error;
+        for (IConnection con : this.backwardsConnections){
+            con.backpropagate();
+        }
     }
 }

@@ -6,4 +6,6 @@ package network.neurons;
 public interface IBackwardsFeed {
 
     void feedBackwards();
+
+    void unsupervizedRBM();
 }

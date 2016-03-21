@@ -1,4 +1,4 @@
-package network;
+package network.Network;
 
 import network.Layers.ILayer;
 import network.Layers.LayerFactory;
@@ -10,8 +10,11 @@ import java.util.ArrayList;
  * Created by EmilSebastian on 17-03-2016.
  */
 public class Network {
-    private ArrayList<ILayer> layers = new ArrayList<>();
+    protected ArrayList<ILayer> layers = new ArrayList<>();
 
+    protected Network(){
+
+    }
     
     public ArrayList<Double> feedInputThroughNetwork(ArrayList<Double> input){
         addInputToVisibleLayer(input);
@@ -30,6 +33,12 @@ public class Network {
     public void feedForward(){
         for (ILayer layer: layers){
             layer.feedForward();
+        }
+    }
+
+    public void resetNetwork(){
+        for(ILayer layer: this.layers){
+            layer.resetLayer();
         }
     }
 

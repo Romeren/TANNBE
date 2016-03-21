@@ -1,5 +1,7 @@
 package network.neurons;
 
+import network.Network.NetworkConfiguration;
+import network.RandomUtilz;
 import network.connections.IConnection;
 
 import java.util.Random;
@@ -8,7 +10,7 @@ import java.util.Random;
  * Created by EmilSebastian on 17-03-2016.
  */
 public class Perceptron extends ANeuron {
-    private final float THREDSHOLD = new Random().nextFloat();
+    private final double THREDSHOLD = RandomUtilz.getDoubleInRange(NetworkConfiguration.minimumInitializedPerceptronThredshold, NetworkConfiguration.maximumInitializedPerceptronThredshold);
 
     public Perceptron(){
         super();
@@ -26,6 +28,8 @@ public class Perceptron extends ANeuron {
 
     @Override
     public void backpropagate() {
-
+        for (IConnection con : this.backwardsConnections){
+            con.backpropagate();
+        }
     }
 }
