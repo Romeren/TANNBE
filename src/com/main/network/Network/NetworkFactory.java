@@ -9,14 +9,20 @@ import com.main.network.connections.IConnection;
 import com.main.network.neurons.INeuron;
 import com.main.network.neurons.NeuronTypes;
 
+import java.security.PublicKey;
 import java.util.Random;
 
 /**
  * Created by EmilSebastian on 21-03-2016.
  */
 public class NetworkFactory {
+    private Network network = new Network();
 
-    public Network addLayer(Network network, LayerTypes lType, NeuronTypes nType, int numberOfNEurons){
+    public Network build(){
+        return this.network;
+    }
+
+    public NetworkFactory addLayer(LayerTypes lType, NeuronTypes nType, int numberOfNEurons){
         network.addLayer(LayerFactory.createLayer(lType, numberOfNEurons, nType));
         if (network.layers.size() > 1 && NetworkConfiguration.isFullyConnected){
             // then connect the new layer with the previouse one
@@ -24,11 +30,7 @@ public class NetworkFactory {
             ILayer newLayer = network.layers.get(network.layers.size()-1);
             fullyConnectToLayers(previous, newLayer);
         }
-        return network;
-    }
-
-    public Network createLayer(){
-        return new Network();
+        return this;
     }
 
     public void fullyConnectToLayers(ILayer first, ILayer secound){

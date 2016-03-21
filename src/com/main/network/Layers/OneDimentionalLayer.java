@@ -1,5 +1,6 @@
 package com.main.network.Layers;
 
+import com.main.network.Exceptions.InvalidNumberOfInput;
 import com.main.network.neurons.INeuron;
 import com.main.network.neurons.NeuronTypes;
 
@@ -39,12 +40,12 @@ public class OneDimentionalLayer implements ILayer{
     }
 
     @Override
-    public ArrayList<Double> getOutput() {
-        ArrayList<Double> r = new ArrayList<>();
-        for (INeuron n : neurons){
-            r.add(n.getOutput());
+    public double[] getOutput() {
+        double[] output = new double[this.neurons.size()];
+        for (int i = 0; i < neurons.size(); i++){
+            output[i] = neurons.get(i).getOutput();
         }
-        return r;
+        return output;
     }
 
     @Override
@@ -55,9 +56,12 @@ public class OneDimentionalLayer implements ILayer{
     }
 
     @Override
-    public void addInputToLayer(ArrayList<Double> input) {
-        for (int i = 0 ; 0 < neurons.size(); i++){
-            neurons.get(i).addInput(input.get(i));
+    public void addInputToLayer(double[] input) throws InvalidNumberOfInput{
+        if(input.length != this.neurons.size()){
+            throw new InvalidNumberOfInput();
+        }
+        for (int i = 0 ; i < neurons.size(); i++){
+            neurons.get(i).addInput(input[i]);
         }
     }
 
@@ -65,6 +69,16 @@ public class OneDimentionalLayer implements ILayer{
     public void backpropagate() {
         for (INeuron n : neurons){
             n.backpropagate();
+        }
+    }
+
+    @Override
+    public void startBackpropagate(double[] expectedValues) throws InvalidNumberOfInput {
+        if(expectedValues.length != neurons.size()){
+            throw new InvalidNumberOfInput();
+        }
+        for (int i = 0; i < neurons.size(); i++){
+            neurons.get(i).startBackpropagate(expectedValues[i]);
         }
     }
 
