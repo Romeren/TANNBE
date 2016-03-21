@@ -8,6 +8,8 @@ public class NetworkConfiguration {
 
     public static double learningRate = 0.05;
 
+    public static int maximumNumberOfSupervizedTrainingIterations = 1000;
+
     //Connection variables:
     public static double minimumInitializedConnectionWeight = -1;
     public static double maximumInitializedConnectionWeight = 1;

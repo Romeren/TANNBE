@@ -22,6 +22,16 @@ public class Network {
 
     }
 
+    public void supervisedTraining(double[][] trainingset, double[][] labels) throws InvalidNumberOfInput{
+        // TODO: add stop criteria to the training algorithm so it will stop when no more can be learnt!
+        for (int i = 0 ; i < NetworkConfiguration.maximumNumberOfSupervizedTrainingIterations; i++){
+            for (int x = 0 ; x < trainingset.length; x++){
+                feedInputThroughNetwork(trainingset[x]);
+                backpropagateNetwork(labels[x]);
+            }
+        }
+    }
+
     public void backpropagateNetwork(double[] expectedValues) throws InvalidNumberOfInput {
         this.layers.get(layers.size()-1).startBackpropagate(expectedValues);
         for(int i = layers.size()-1; i > 0; i--){
@@ -77,4 +87,7 @@ public class Network {
         return this.layers.get(index);
     }
 
+    public int getNumberOfLayers (){
+        return this.layers.size();
+    }
 }

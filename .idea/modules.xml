@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/NetworkVisualizationModule/NetworkVisualizationModule.iml" filepath="$PROJECT_DIR$/NetworkVisualizationModule/NetworkVisualizationModule.iml" />
       <module fileurl="file://$PROJECT_DIR$/TANNBE.iml" filepath="$PROJECT_DIR$/TANNBE.iml" />
     </modules>
   </component>
