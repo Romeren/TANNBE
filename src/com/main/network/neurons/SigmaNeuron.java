@@ -1,6 +1,6 @@
-package network.neurons;
+package com.main.network.neurons;
 
-import network.connections.IConnection;
+import com.main.network.connections.IConnection;
 
 /**
  * Created by EmilSebastian on 18-03-2016.
@@ -24,4 +24,3 @@ public class SigmaNeuron extends ANeuron {
         }
     }
 }
-    

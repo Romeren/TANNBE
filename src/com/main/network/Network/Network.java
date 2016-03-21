@@ -1,8 +1,6 @@
-package network.Network;
+package com.main.network.Network;
 
-import network.Layers.ILayer;
-import network.Layers.LayerFactory;
-import network.Layers.LayerTypes;
+import com.main.network.Layers.ILayer;
 
 import java.util.ArrayList;
 

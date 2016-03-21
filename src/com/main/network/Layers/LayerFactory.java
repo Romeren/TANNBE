@@ -1,6 +1,6 @@
-package network.Layers;
+package com.main.network.Layers;
 
-import network.neurons.*;
+import com.main.network.neurons.*;
 
 /**
  * Created by EmilSebastian on 18-03-2016.

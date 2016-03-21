@@ -1,6 +1,6 @@
-package network.connections;
+package com.main.network.connections;
 
-import network.neurons.INeuron;
+import com.main.network.neurons.INeuron;
 
 /**
  * Created by EmilSebastian on 17-03-2016.

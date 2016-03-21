@@ -1,4 +1,4 @@
-package network.neurons;
+package com.main.network.neurons;
 
 /**
  * Created by EmilSebastian on 18-03-2016.

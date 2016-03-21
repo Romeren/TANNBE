@@ -1,10 +1,8 @@
-package network.neurons;
+package com.main.network.neurons;
 
-import network.Network.NetworkConfiguration;
-import network.RandomUtilz;
-import network.connections.IConnection;
-
-import java.util.Random;
+import com.main.network.Network.NetworkConfiguration;
+import com.main.network.RandomUtilz;
+import com.main.network.connections.IConnection;
 
 /**
  * Created by EmilSebastian on 17-03-2016.

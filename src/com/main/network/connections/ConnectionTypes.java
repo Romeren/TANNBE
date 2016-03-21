@@ -1,4 +1,4 @@
-package network.connections;
+package com.main.network.connections;
 
 /**
  * Created by EmilSebastian on 21-03-2016.

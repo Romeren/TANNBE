@@ -1,6 +1,6 @@
-package network.neurons;
+package com.main.network.neurons;
 
-import network.connections.IConnection;
+import com.main.network.connections.IConnection;
 
 import java.util.ArrayList;
 

@@ -1,13 +1,13 @@
-package network.Network;
+package com.main.network.Network;
 
-import network.Layers.ILayer;
-import network.Layers.LayerFactory;
-import network.Layers.LayerTypes;
-import network.RandomUtilz;
-import network.connections.BasicConnection;
-import network.connections.IConnection;
-import network.neurons.INeuron;
-import network.neurons.NeuronTypes;
+import com.main.network.Layers.ILayer;
+import com.main.network.Layers.LayerFactory;
+import com.main.network.Layers.LayerTypes;
+import com.main.network.RandomUtilz;
+import com.main.network.connections.BasicConnection;
+import com.main.network.connections.IConnection;
+import com.main.network.neurons.INeuron;
+import com.main.network.neurons.NeuronTypes;
 
 import java.util.Random;
 
@@ -17,7 +17,7 @@ import java.util.Random;
 public class NetworkFactory {
 
     public Network addLayer(Network network, LayerTypes lType, NeuronTypes nType, int numberOfNEurons){
-        network.addLayer(LayerFactory.createLayer(lType,numberOfNEurons,nType));
+        network.addLayer(LayerFactory.createLayer(lType, numberOfNEurons, nType));
         if (network.layers.size() > 1 && NetworkConfiguration.isFullyConnected){
             // then connect the new layer with the previouse one
             ILayer previous = network.layers.get(network.layers.size()-2);
@@ -42,7 +42,7 @@ public class NetworkFactory {
                 for (INeuron n2 : secound.getNeurons()){
                     connectTwoNeurons(n1, n2,
                             new BasicConnection(RandomUtilz.getDoubleInRange(NetworkConfiguration.minimumInitializedConnectionWeight,
-                                        NetworkConfiguration.maximumInitializedConnectionWeight),
+                                    NetworkConfiguration.maximumInitializedConnectionWeight),
                             n1, n2));
                 }
             }

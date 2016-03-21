@@ -1,4 +1,4 @@
-package network.Network;
+package com.main.network.Network;
 
 /**
  * Created by EmilSebastian on 21-03-2016.

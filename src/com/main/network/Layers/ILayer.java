@@ -1,7 +1,7 @@
-package network.Layers;
+package com.main.network.Layers;
 
-import network.neurons.INeuron;
-import network.neurons.NeuronTypes;
+import com.main.network.neurons.INeuron;
+import com.main.network.neurons.NeuronTypes;
 
 import java.util.ArrayList;
 

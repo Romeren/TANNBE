@@ -1,8 +1,8 @@
-package network.connections;
+package com.main.network.connections;
 
-import network.neurons.IBackwardsFeed;
-import network.Network.NetworkConfiguration;
-import network.neurons.INeuron;
+import com.main.network.Network.NetworkConfiguration;
+import com.main.network.neurons.IBackwardsFeed;
+import com.main.network.neurons.INeuron;
 
 /**
  * Created by EmilSebastian on 17-03-2016.
