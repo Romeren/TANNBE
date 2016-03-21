@@ -1,11 +1,13 @@
 package network.connections;
 
+import network.neurons.IBackwardsFeed;
+import network.Network.NetworkConfiguration;
 import network.neurons.INeuron;
 
 /**
  * Created by EmilSebastian on 17-03-2016.
  */
-public abstract class AConnection implements  IConnection{
+public abstract class AConnection implements  IConnection {
     private static final double UNCHANGEDUPDATEDWEIGHT = Double.MIN_VALUE;
     protected double weight;
     protected double updatedWeight = UNCHANGEDUPDATEDWEIGHT;
@@ -44,5 +46,16 @@ public abstract class AConnection implements  IConnection{
     @Override
     public void feedBackwards(double input) {
         this.start.addInput(input * this.weight);
+    }
+
+    @Override
+    public void unsupervizedRBM() {
+        if(!(start instanceof IBackwardsFeed) && !(end instanceof IBackwardsFeed)){
+            return;
+        }
+        IBackwardsFeed start = (IBackwardsFeed) this.start;
+        IBackwardsFeed end = (IBackwardsFeed) this.end;
+        this.updatedWeight = this.weight + (NetworkConfiguration.learningRate *
+                (start.getLastRoundsOutput() * end.getLastRoundsOutput()) - (this.start.getOutput() * this.end.getOutput()));
     }
 }

@@ -12,4 +12,5 @@ public interface IConnection {
     void backpropagate();
     INeuron getStart();
     INeuron getEnd();
+    void unsupervizedRBM();
 }

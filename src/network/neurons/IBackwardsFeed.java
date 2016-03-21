@@ -5,6 +5,8 @@ package network.neurons;
  */
 public interface IBackwardsFeed {
 
+    double getLastRoundsOutput();
+
     void feedBackwards();
 
     void unsupervizedRBM();
