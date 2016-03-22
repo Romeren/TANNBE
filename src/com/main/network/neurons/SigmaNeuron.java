@@ -8,7 +8,7 @@ import com.main.network.connections.IConnection;
 public class SigmaNeuron extends ANeuron {
 
     public double sigmaFunction(double input){
-        return 1/(Math.exp(getInput() * (-1))+1);
+        return 1/((Math.exp(input * (-1))  +1));
     }
 
     @Override

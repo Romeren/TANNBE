@@ -38,6 +38,7 @@ public abstract class ANeuron implements INeuron{
     @Override
     public void startBackpropagate(double targetValue) {
         this.error = (targetValue -this.getOutput());
+        //System.out.println("Target: " + targetValue + " Current: " + this.getOutput() + " Error: " + this.error);
     }
 
     @Override
@@ -60,7 +61,7 @@ public abstract class ANeuron implements INeuron{
     public void feedForward() {
 
         this.feedToActivationFunction(); // each child must implement the method
-
+        //System.out.println(this.getOutput());
         for(IConnection con : forwardsConnections){
             con.feedForward(this.output);
         }

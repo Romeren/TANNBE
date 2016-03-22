@@ -15,8 +15,8 @@ public class NetworkConfiguration {
     public static double maximumInitializedConnectionWeight = 1;
 
     //Linear variables:
-    public static double minimumInitializedLinearBias = 0;
-    public static double maximumInitializedLinearBias = 1;
+    public static double minimumInitializedLinearBias = -2;
+    public static double maximumInitializedLinearBias = 2;
 
     //Perceptron variables:
     public static double minimumInitializedPerceptronThredshold = 0;

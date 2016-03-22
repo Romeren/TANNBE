@@ -1,8 +1,11 @@
 package visualization.VisualizationTools;
 
+import com.main.network.Layers.LayerTypes;
 import com.main.network.Network.Network;
+import com.main.network.Network.NetworkFactory;
 import com.main.network.connections.IConnection;
 import com.main.network.neurons.INeuron;
+import com.main.network.neurons.NeuronTypes;
 import edu.uci.ics.jung.algorithms.layout.*;
 import edu.uci.ics.jung.graph.Forest;
 import edu.uci.ics.jung.graph.Graph;
@@ -30,8 +33,8 @@ public class NetworkPlot extends JFrame{
         // Add some vertices. From above we defined these to be type Integer.
         int numberOfLayers = net.getNumberOfLayers();
         int index = 0;
-        Map<INeuron, Integer> nameMapping = new HashMap<>();
-        Map<Integer, Double> weightMap = new HashMap<>();
+        Map<INeuron, Integer> nameMapping = new HashMap();
+        Map<Integer, Double> weightMap = new HashMap();
         int edgeCount = 0;
         for(int x = 0; x < numberOfLayers; x++){
             for(int y = 0 ; y < net.getLayer(x).getNeurons().size(); y++){
@@ -54,10 +57,10 @@ public class NetworkPlot extends JFrame{
 
         // Let's see what we have. Note the nice output from the
         // SparseMultigraph<V,E> toString() method
-        System.out.println("The graph g = " + g.toString());
+        //System.out.println("The graph g = " + g.toString());
 
         // The Layout<V, E> is parameterized by the vertex and edge types
-        Layout<Integer, String> layout =  new DAGLayout<>(g);
+        Layout<Integer, String> layout =  new DAGLayout(g);
         layout.setSize(new Dimension(300,300)); // sets the initial size of the space
         // The BasicVisualizationServer<V,E> is parameterized by the edge types
         BasicVisualizationServer<Integer,String> vv =
@@ -68,5 +71,14 @@ public class NetworkPlot extends JFrame{
         getContentPane().add(vv);
         pack();
         setVisible(true);
+    }
+
+    public static void main(String[] args){
+        Network net = new NetworkFactory().addLayer(LayerTypes.ONE_DIMENTIONAL, NeuronTypes.LINEAR, 1)
+                .addLayer(LayerTypes.ONE_DIMENTIONAL, NeuronTypes.LINEAR, 3)
+                .addLayer(LayerTypes.ONE_DIMENTIONAL,NeuronTypes.LINEAR,3)
+                .addLayer(LayerTypes.ONE_DIMENTIONAL, NeuronTypes.LINEAR, 1).build();
+        new NetworkPlot(net);
+
     }
 }

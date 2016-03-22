@@ -34,4 +34,13 @@ public class SigmaNeuronTest {
         Assert.assertEquals(n.getOutput() >= 0.5, true);
 
     }
+
+    @Test
+    public void sigmafunctionTest(){
+        SigmaNeuron sn = new SigmaNeuron();
+
+        for(double i = -10 ; i < 10 ; i += 1) {
+            System.out.println(sn.sigmaFunction(i));
+        }
+    }
 }
