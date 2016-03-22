@@ -65,6 +65,9 @@ public class RegressionPlot3D extends AbstractAnalysis {
         chart.getScene().getGraph().add(surface);
     }
 
+    /*
+            For testing!
+     */
     public static void main(String[] args) throws Exception {
         NetworkConfiguration.maximumNumberOfSupervizedTrainingIterations =10000;
         NetworkConfiguration.learningRate= 0.1;

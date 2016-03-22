@@ -58,6 +58,10 @@ public class RegressionPlot2D {
     }
 
 
+    /*
+            FOR TESTING
+            SAMPLE
+     */
     public static void main(String[] args){
         NetworkConfiguration.maximumNumberOfSupervizedTrainingIterations =10000;
         NetworkConfiguration.learningRate= 0.1;

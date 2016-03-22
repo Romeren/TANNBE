@@ -12,7 +12,7 @@ public class LayerFactory {
         switch (type){
             case ONE_DIMENTIONAL:
                 layer = new OneDimentionalLayer();
-                layer.setNeuronType(neuronType);
+                //layer.setNeuronType(neuronType);
                 break;
             case TWO_DIMENTIONAL:
                 return null;

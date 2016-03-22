@@ -28,4 +28,8 @@ public class NetworkConfiguration {
     public static double minimumRBMBias = -0.2;
     public static double maximumRBMBias = 0.2;
 
+    // Self-Organized map SOMs Variables:
+    public static double minimumInitializedSOMWeight = 0;
+    public static double maximumInitializedSOMWeight = 1;
+    public static double SOMsLearningRate = 0.1;
 }

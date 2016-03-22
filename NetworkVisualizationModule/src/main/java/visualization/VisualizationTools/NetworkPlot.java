@@ -29,6 +29,7 @@ import java.util.Map;
 public class NetworkPlot extends JFrame{
 
     public NetworkPlot(Network net){
+        /*
         Graph<Integer, String> g = new SparseMultigraph<Integer, String>();
         // Add some vertices. From above we defined these to be type Integer.
         int numberOfLayers = net.getNumberOfLayers();
@@ -71,14 +72,17 @@ public class NetworkPlot extends JFrame{
         getContentPane().add(vv);
         pack();
         setVisible(true);
+        */
     }
 
+    /*
+            FOR TESTING SAMPLE!
+     */
     public static void main(String[] args){
         Network net = new NetworkFactory().addLayer(LayerTypes.ONE_DIMENTIONAL, NeuronTypes.LINEAR, 1)
                 .addLayer(LayerTypes.ONE_DIMENTIONAL, NeuronTypes.LINEAR, 3)
                 .addLayer(LayerTypes.ONE_DIMENTIONAL,NeuronTypes.LINEAR,3)
                 .addLayer(LayerTypes.ONE_DIMENTIONAL, NeuronTypes.LINEAR, 1).build();
         new NetworkPlot(net);
-
     }
 }

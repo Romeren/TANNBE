@@ -7,12 +7,12 @@ import com.main.network.neurons.INeuron;
 /**
  * Created by EmilSebastian on 17-03-2016.
  */
-public abstract class AConnection implements  IConnection {
+public abstract class AConnection implements  IConnection<Double, Double> {
     private static final double UNCHANGEDUPDATEDWEIGHT = Double.MIN_VALUE;
     protected double weight;
     protected double updatedWeight = UNCHANGEDUPDATEDWEIGHT;
-    private INeuron start;
-    private INeuron end;
+    protected INeuron start;
+    protected INeuron end;
 
     public AConnection(double weight, INeuron start, INeuron end){
         this.weight = weight;
@@ -34,22 +34,12 @@ public abstract class AConnection implements  IConnection {
     }
 
     @Override
-    public INeuron getStart() {
-        return this.start;
-    }
-
-    @Override
-    public INeuron getEnd() {
-        return this.end;
-    }
-
-    @Override
-    public void feedForward(double input) {
+    public void feedForward(Double input) {
         this.end.addInput(input * this.weight);
     }
 
     @Override
-    public void feedBackwards(double input) {
+    public void feedBackwards(Double input) {
         this.start.addInput(input * this.weight);
     }
 

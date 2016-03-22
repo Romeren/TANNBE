@@ -1,5 +1,6 @@
 package com.main.network.Network;
 
+import com.main.network.CommonInterfaces.IBackpropagationable;
 import com.main.network.Exceptions.InvalidNumberOfInput;
 import com.main.network.Layers.ILayer;
 import com.sun.deploy.util.ArrayUtil;
@@ -33,9 +34,17 @@ public class Network {
     }
 
     public void backpropagateNetwork(double[] expectedValues) throws InvalidNumberOfInput {
-        this.layers.get(layers.size()-1).startBackpropagate(expectedValues);
+        ILayer lay = this.layers.get(layers.size() - 1);
+
+        if(!(lay instanceof IBackpropagationable)){
+            return;
+        }
+
+        ((IBackpropagationable)lay).startBackpropagate(expectedValues);
         for(int i = layers.size()-1; i > 0; i--){
-            layers.get(i).backpropagate();
+            lay = layers.get(i);
+            if(!(lay instanceof IBackpropagationable)) return;
+            ((IBackpropagationable)lay).backpropagate();
         }
         resetNetwork();
     }

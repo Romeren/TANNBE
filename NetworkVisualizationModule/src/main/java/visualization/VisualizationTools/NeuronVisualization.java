@@ -1,7 +1,11 @@
 package visualization.VisualizationTools;
 
+import com.main.network.Layers.LayerTypes;
+import com.main.network.Network.Network;
+import com.main.network.Network.NetworkFactory;
 import com.main.network.connections.IConnection;
 import com.main.network.neurons.INeuron;
+import com.main.network.neurons.NeuronTypes;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
@@ -67,5 +71,12 @@ public class NeuronVisualization{
         rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
 
         new JfreeChartFrame(chart, "Neuron");
+    }
+
+    public static void main(String[] args){
+        Network net = new NetworkFactory().addLayer(LayerTypes.ONE_DIMENTIONAL, NeuronTypes.SIGMA, 4)
+                .addLayer(LayerTypes.ONE_DIMENTIONAL, NeuronTypes.PERCEPTRON, 1).build();
+
+        new NeuronVisualization(net.getLayer(1).getNeurons().get(0));
     }
 }

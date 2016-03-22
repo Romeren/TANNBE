@@ -33,23 +33,17 @@ public class NetworkFactory {
         return this;
     }
 
-    public void fullyConnectToLayers(ILayer first, ILayer secound){
-        Random random = new Random();
-        NeuronTypes nt1 = first.getNeuronType();
-        NeuronTypes nt2 = secound.getNeuronType();
-        // if Self-Organizing-Map (SOMS) Or Convolutional neural network CNN we need to do some other thing:
-        if((nt1 == NeuronTypes.PERCEPTRON || nt1 == NeuronTypes.LINEAR || nt1 == NeuronTypes.SIGMA || nt1 == NeuronTypes.RBM) &&
-                (nt2 == NeuronTypes.PERCEPTRON || nt2 == NeuronTypes.LINEAR || nt2 == NeuronTypes.SIGMA || nt2 == NeuronTypes.RBM)){
-            for (INeuron n1 : first.getNeurons()){
-                for (INeuron n2 : secound.getNeurons()){
-                    connectTwoNeurons(n1, n2,
-                            new BasicConnection(RandomUtilz.getDoubleInRange(NetworkConfiguration.minimumInitializedConnectionWeight,
-                                    NetworkConfiguration.maximumInitializedConnectionWeight),
-                            n1, n2));
-                }
+    public void fullyConnectToLayers(ILayer first, ILayer secound) {
+        for (INeuron n1 : first.getNeurons()) {
+            for (INeuron n2 : secound.getNeurons()) {
+                connectTwoNeurons(n1, n2,
+                        new BasicConnection(RandomUtilz.getDoubleInRange(NetworkConfiguration.minimumInitializedConnectionWeight,
+                                NetworkConfiguration.maximumInitializedConnectionWeight),
+                                n1, n2));
             }
         }
     }
+
 
     private void connectTwoNeurons(INeuron first, INeuron second, IConnection con){
         first.getForwardConnections().add(con);

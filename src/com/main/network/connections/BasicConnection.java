@@ -14,7 +14,7 @@ public class BasicConnection extends AConnection {
 
     @Override
     public void backpropagate() {
-        this.updatedWeight = this.weight + ((NetworkConfiguration.learningRate * this.getEnd().getError()) *this.getStart().getOutput());
-        this.getStart().addBackpropagationError(this.getEnd().getError() * this.getWeight());
+        this.updatedWeight = this.weight + ((NetworkConfiguration.learningRate * this.end.getError()) *this.start.getOutput());
+        this.start.addBackpropagationError(this.end.getError() * this.getWeight());
     }
 }
