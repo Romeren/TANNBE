@@ -29,16 +29,12 @@ public class SOMsPlot {
         for (int x = 0; x < NetworkConfiguration.SOMsGridDimensions[0] ; x++){
             for (int y = 0; y < NetworkConfiguration.SOMsGridDimensions[1]; y++){
                 double[] d = ((ISOMsNode) n.get(x+ (y*NetworkConfiguration.SOMsGridDimensions[0]))).getWeights();
-//                System.out.println("1:" + d[0] + "\t2:" + d[1] +"\t3:" + d[2]);
                 double awg = 0;
                 for (double tmp : d){
-//                    System.out.print(tmp + "  ");
                     awg += tmp;
                 }
-//                System.out.print(awg/d.length + "\t");
                 data[x][y] = awg/d.length;
             }
-            System.out.println();
         }
 
         HeatChart map = new HeatChart(data);
@@ -69,7 +65,6 @@ public class SOMsPlot {
 
         try {
             for (int i =0 ; i<NetworkConfiguration.SOMsMaxNumberOfIterations ;i++) {
-                System.out.println(i);
                 double r = RandomUtilz.getDoubleInRange(0, 255);
                 double g = RandomUtilz.getDoubleInRange(0, 255);
                 double b = RandomUtilz.getDoubleInRange(0, 255);
