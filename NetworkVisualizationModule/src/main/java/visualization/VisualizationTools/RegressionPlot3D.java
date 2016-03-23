@@ -69,7 +69,11 @@ public class RegressionPlot3D extends AbstractAnalysis {
             For testing!
      */
     public static void main(String[] args) throws Exception {
-        NetworkConfiguration.maximumNumberOfSupervizedTrainingIterations =10000;
+        NetworkConfiguration.maximumNumberOfSupervizedTrainingIterations =1000;
+        NetworkConfiguration.minimumInitializedLinearBias = 0.2;
+        NetworkConfiguration.maximumInitializedLinearBias = 1;
+        NetworkConfiguration.minimumInitializedConnectionWeight = 0.9;
+        NetworkConfiguration.maximumInitializedConnectionWeight = 1;
         NetworkConfiguration.learningRate= 0.1;
 
         Mapper func = new Mapper() {
@@ -83,7 +87,7 @@ public class RegressionPlot3D extends AbstractAnalysis {
 
         Network net = new NetworkFactory()
                 .addLayer(LayerTypes.ONE_DIMENTIONAL, NeuronTypes.LINEAR,2)
-                .addLayer(LayerTypes.ONE_DIMENTIONAL, NeuronTypes.SIGMA, 4)
+                .addLayer(LayerTypes.ONE_DIMENTIONAL, NeuronTypes.SIGMA, 50)
                 .addLayer(LayerTypes.ONE_DIMENTIONAL, NeuronTypes.LINEAR, 1)
                 .build();
 

@@ -2,6 +2,7 @@ package com.main.network.connections;
 
 import com.main.network.Network.NetworkConfiguration;
 import com.main.network.neurons.INeuron;
+import com.main.network.neurons.ISOMsNode;
 import com.main.network.neurons.SomsNode;
 
 import java.util.ArrayList;
@@ -9,41 +10,55 @@ import java.util.ArrayList;
 /**
  * Created by EmilSebastian on 22-03-2016.
  */
-public class SomsConnection implements IConnection<double[], Double> {
-    private ArrayList<SomsNode> end;
+public class SomsConnection implements IConnection {
+    private ISOMsNode[] end;
     private INeuron start;
-    private int[] dims = {10,10};
+    private int iteration = 0;
+    private int connectionNumber;
 
-    public SomsConnection(INeuron start, ArrayList<SomsNode> end, int[] dims){
+    public SomsConnection(INeuron start, ArrayList<INeuron> end, int connectionNumber){
         this.start = start;
-        this.end = end;
-        this.dims = dims;
+        this.connectionNumber = connectionNumber;
+        this.end = new ISOMsNode[end.size()];
+        for (int n = 0 ; n < end.size(); n++){
+            this.end[n] = (ISOMsNode) end.get(n);
+        }
     }
 
     @Override
     public void resetValues() {}
 
     @Override
-    public void feedForward(double[] input) {
-        SomsNode candidate = end.get(0);
-        double candidateDist = candidate.calculateDistance(input);
+    public void feedForward(double input) {
+        for (ISOMsNode n : end){
+            n.addInput(input - n.getWeights()[this.connectionNumber] * (input - n.getWeights()[this.connectionNumber]));
+        }
+    }
+
+    public void adjustWeights(){
+        ISOMsNode candidate = end[0];
+        double candidateDist = candidate.getDistance();
         int xCordinat = 0, yCordinat = 0;
-        for(int x = 0 ; x < dims[0] ; x++ ) {
-            for (int y = 0; y < dims[1]; y++) {
-                SomsNode secoundCand =end.get(x + (y* dims[0]));
-                double secound = secoundCand.calculateDistance(input);
+        for(int x = 0 ; x < NetworkConfiguration.SOMsGridDimensions[0] ; x++ ) {
+            for (int y = 0; y < NetworkConfiguration.SOMsGridDimensions[1]; y++) {
+                int index = x + (y* NetworkConfiguration.SOMsGridDimensions[0]);
+                ISOMsNode secoundCand =end[index];
+                double secound = secoundCand.getDistance();
                 if (secound < candidateDist) {
-                    candidate = secoundCand;
                     candidateDist = secound;
+                    xCordinat = x;
+                    yCordinat = y;
+//                    System.out.println("X:" + x + "   Y:" + y + "    DIST:" + candidateDist);
                 }
             }
         }
 
-        int radius = 0;
-        int xbegin = Math.max(xCordinat - radius, 0);
-        int xend = Math.min( xCordinat + radius, dims[0]);
-        int ybegin = Math.max(yCordinat- radius, 0);
-        int yend = Math.min(  yCordinat + radius, dims[1]);
+        iteration++;
+        double radius = NetworkConfiguration.calculateNeighborhoodRadius(iteration);
+        int xbegin = (int) Math.max(xCordinat - radius, 0);
+        int xend = (int) Math.min( xCordinat + radius, NetworkConfiguration.SOMsGridDimensions[0]);
+        int ybegin = (int) Math.max(yCordinat- radius, 0);
+        int yend = (int) Math.min(  yCordinat + radius, NetworkConfiguration.SOMsGridDimensions[1]);
 
         for (int x = xbegin; x < xend; x++) {
             for (int y = ybegin; y < yend; y++) {
@@ -51,14 +66,19 @@ public class SomsConnection implements IConnection<double[], Double> {
                 double r2 = radius* radius;
                 if (dist2 < r2) {
                     double influence = Math.exp(-(dist2)/(2*r2));
-                    end.get(x+(y*dims[1])).adjustWeights(input, NetworkConfiguration.SOMsLearningRate, influence);
+                    end[x+(y*NetworkConfiguration.SOMsGridDimensions[1])].adjustWeights(
+                            start.getOutput(),
+                            NetworkConfiguration.calculateLearningRate(iteration),
+                            influence,
+                            this.connectionNumber);
                 }
             }
         }
     }
 
+
     @Override
-    public void feedBackwards(Double input) {
+    public void feedBackwards(double input) {
         start.addInput(input);
     }
 

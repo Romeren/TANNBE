@@ -1,10 +1,13 @@
 package com.main.network.Network;
 
+import java.util.Map;
+
 /**
  * Created by EmilSebastian on 21-03-2016.
  */
 public class NetworkConfiguration {
     public static boolean isFullyConnected = true;
+    public static int dimentionalityOfInput = 3;
 
     public static double learningRate = 0.05;
 
@@ -31,5 +34,20 @@ public class NetworkConfiguration {
     // Self-Organized map SOMs Variables:
     public static double minimumInitializedSOMWeight = 0;
     public static double maximumInitializedSOMWeight = 1;
-    public static double SOMsLearningRate = 0.1;
+    public static int SOMsMaxNumberOfIterations = 5000;
+    public static int[] SOMsGridDimensions = {10, 10};
+
+    //## help functions:
+    public static double calculateLearningRate(int iteration) {
+        return learningRate * Math.exp(-iteration / SOMsMaxNumberOfIterations);
+    }
+    public static double calculateNeighborhoodRadius(int iteration) {
+        return calculateRadious() * Math.exp(-iteration / calculateTimeConstant());
+    }
+    public static double calculateTimeConstant(){
+        return SOMsMaxNumberOfIterations/Math.log(calculateRadious());
+    }
+    public static double calculateRadious() {
+        return Math.max(SOMsGridDimensions[0], SOMsGridDimensions[1]) / 2;
+    }
 }

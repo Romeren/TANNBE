@@ -4,10 +4,10 @@ package com.main.network.connections;
 /**
  * Created by EmilSebastian on 17-03-2016.
  */
-public interface IConnection<I, O> {
+public interface IConnection {
     void resetValues();
-    void feedForward(I input);
-    void feedBackwards(O input);
+    void feedForward(double input);
+    void feedBackwards(double input);
     void backpropagate();
     void unsupervizedRBM();
     double getWeight();

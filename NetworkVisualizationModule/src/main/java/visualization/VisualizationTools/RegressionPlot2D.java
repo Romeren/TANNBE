@@ -10,8 +10,6 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-import sun.nio.ch.Net;
-import visualization.Main;
 import visualization.Utilz.JfreeChartFrame;
 
 /**
@@ -44,7 +42,7 @@ public class RegressionPlot2D {
                 input[i] = current;
                 try {
                     // TODO: how to handle multible output neurons:
-                    double x =net.feedInputThroughNetwork(input)[0];
+                    double x = net.feedInputThroughNetwork(input)[0];
                     //System.out.println(x);
                     net.resetNetwork();
                     serie.add(current, x);
@@ -63,21 +61,26 @@ public class RegressionPlot2D {
             SAMPLE
      */
     public static void main(String[] args){
-        NetworkConfiguration.maximumNumberOfSupervizedTrainingIterations =10000;
-        NetworkConfiguration.learningRate= 0.1;
-        Network net = new NetworkFactory().addLayer(LayerTypes.ONE_DIMENTIONAL, NeuronTypes.LINEAR, 1)
-                .addLayer(LayerTypes.ONE_DIMENTIONAL, NeuronTypes.SIGMA, 16)
-                .addLayer(LayerTypes.ONE_DIMENTIONAL, NeuronTypes.SIGMA, 16)
+        NetworkConfiguration.maximumNumberOfSupervizedTrainingIterations =2000;
+        NetworkConfiguration.learningRate= 0.01;
+        NetworkConfiguration.minimumInitializedLinearBias = -5;
+        NetworkConfiguration.maximumInitializedLinearBias = 5;
+        NetworkConfiguration.minimumInitializedConnectionWeight = 0.6;
+        NetworkConfiguration.maximumInitializedConnectionWeight =1;
+
+        Network net = new NetworkFactory().addLayer(LayerTypes.ONE_DIMENTIONAL, NeuronTypes.SIGMA, 1)
+                .addLayer(LayerTypes.ONE_DIMENTIONAL, NeuronTypes.SIGMA, 4)
+                .addLayer(LayerTypes.ONE_DIMENTIONAL, NeuronTypes.SIGMA, 5)
                 .addLayer(LayerTypes.ONE_DIMENTIONAL, NeuronTypes.LINEAR, 1).build();
 
         XYSeries serie = new XYSeries("Expected");
 
-        double[][] trainingset = new double[100][1];
-        double[][] testset = new double[100][1];
+        double[][] trainingset = new double[300][1];
+        double[][] testset = new double[300][1];
         int counter = 0;
-        for(double i = -1; counter < 100; i+=0.02){
+        for(double i = -1; counter < trainingset.length; i+=0.01){
             trainingset[counter][0] = i;
-            testset[counter][0] =  Math.sin(2 * Math.PI * i) + Math.sin(5 * Math.PI * i);
+            testset[counter][0] =  Math.sin(2 * Math.PI * i) + Math.sin(5 * Math.PI * i) ;
             serie.add(i, testset[counter][0]);
             counter++;
         }
@@ -87,7 +90,6 @@ public class RegressionPlot2D {
         } catch (InvalidNumberOfInput invalidNumberOfInput) {
             invalidNumberOfInput.printStackTrace();
         }
-        new RegressionPlot2D(net,-1,1,0.02, serie);
-
+        new RegressionPlot2D(net,-1,2,0.02, serie);
     }
 }

@@ -16,6 +16,9 @@ public class LayerFactory {
                 break;
             case TWO_DIMENTIONAL:
                 return null;
+            case SOMSLAYER:
+                layer = new SomsLayer();
+                break;
             default:
                 layer=null;
         }
@@ -46,6 +49,11 @@ public class LayerFactory {
             case RBM:
                 for(int i = 0; i < numberOfNeurons; i++){
                     layer.addNeuron(new RBMNeuron());
+                }
+                break;
+            case SOMS:
+                for(int i = 0; i < numberOfNeurons; i++){
+                    layer.addNeuron(new SomsNode());
                 }
                 break;
         }

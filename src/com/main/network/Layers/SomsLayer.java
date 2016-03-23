@@ -1,7 +1,10 @@
 package com.main.network.Layers;
 
 import com.main.network.Exceptions.InvalidNumberOfInput;
+import com.main.network.connections.IConnection;
+import com.main.network.connections.SomsConnection;
 import com.main.network.neurons.INeuron;
+import com.main.network.neurons.ISOMsNode;
 import com.main.network.neurons.NeuronTypes;
 
 import java.util.ArrayList;
@@ -10,12 +13,16 @@ import java.util.ArrayList;
  * Created by EmilSebastian on 22-03-2016.
  */
 public class SomsLayer extends ALayer {
-    private ArrayList<INeuron> neurons = new ArrayList<>();
-    private int layerIndex;
-
-    public SomsLayer(int layerIndex){
+    public SomsLayer(){
         super();
-        this.layerIndex=layerIndex;
+    }
+
+    @Override
+    public void feedForward() {
+        for(IConnection con : this.getNeurons().get(0).getBackwardsConnections()){
+            ((SomsConnection) con).adjustWeights();
+        }
+        super.feedForward();
     }
 
     @Override

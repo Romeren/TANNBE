@@ -3,9 +3,11 @@ package com.main.network.Network;
 import com.main.network.Layers.ILayer;
 import com.main.network.Layers.LayerFactory;
 import com.main.network.Layers.LayerTypes;
+import com.main.network.Layers.SomsLayer;
 import com.main.network.RandomUtilz;
 import com.main.network.connections.BasicConnection;
 import com.main.network.connections.IConnection;
+import com.main.network.connections.SomsConnection;
 import com.main.network.neurons.INeuron;
 import com.main.network.neurons.NeuronTypes;
 
@@ -34,12 +36,23 @@ public class NetworkFactory {
     }
 
     public void fullyConnectToLayers(ILayer first, ILayer secound) {
-        for (INeuron n1 : first.getNeurons()) {
-            for (INeuron n2 : secound.getNeurons()) {
-                connectTwoNeurons(n1, n2,
-                        new BasicConnection(RandomUtilz.getDoubleInRange(NetworkConfiguration.minimumInitializedConnectionWeight,
-                                NetworkConfiguration.maximumInitializedConnectionWeight),
-                                n1, n2));
+        if(secound instanceof SomsLayer){
+            int i = 0;
+            for (INeuron n1 : first.getNeurons()){
+                SomsConnection con = new SomsConnection(n1, secound.getNeurons(), i);
+                i++;
+                for (INeuron n2 : secound.getNeurons()){
+                    connectTwoNeurons(n1, n2, con);
+                }
+            }
+        }else {
+            for (INeuron n1 : first.getNeurons()) {
+                for (INeuron n2 : secound.getNeurons()) {
+                    connectTwoNeurons(n1, n2,
+                            new BasicConnection(RandomUtilz.getDoubleInRange(NetworkConfiguration.minimumInitializedConnectionWeight,
+                                    NetworkConfiguration.maximumInitializedConnectionWeight),
+                                    n1, n2));
+                }
             }
         }
     }

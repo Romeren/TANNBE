@@ -8,24 +8,24 @@ import jdk.nashorn.internal.ir.LiteralNode;
 import sun.plugin.javascript.navig4.Layer;
 
 import java.sql.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
  * Created by EmilSebastian on 17-03-2016.
  */
 public class Network {
+//    private ExcecutorService
     protected ArrayList<ILayer> layers = new ArrayList<>();
-
     protected Network(){
 
     }
 
     public void supervisedTraining(double[][] trainingset, double[][] labels) throws InvalidNumberOfInput{
         // TODO: add stop criteria to the training algorithm so it will stop when no more can be learnt!
+        ArrayList<double[]> train = new ArrayList(Arrays.asList(trainingset));
         for (int i = 0 ; i < NetworkConfiguration.maximumNumberOfSupervizedTrainingIterations; i++){
+//            Collections.shuffle(train);
             for (int x = 0 ; x < trainingset.length; x++){
                 feedInputThroughNetwork(trainingset[x]);
                 backpropagateNetwork(labels[x]);
@@ -44,7 +44,8 @@ public class Network {
         for(int i = layers.size()-1; i > 0; i--){
             lay = layers.get(i);
             if(!(lay instanceof IBackpropagationable)) return;
-            ((IBackpropagationable)lay).backpropagate();
+//            System.out.println("BACK  " + i);
+            ((IBackpropagationable) lay).backpropagate();
         }
         resetNetwork();
     }
@@ -52,7 +53,6 @@ public class Network {
     public double[] feedInputThroughNetwork(double[] input) throws InvalidNumberOfInput{
         addInputToVisibleLayer(input);
         feedForward();
-        ArrayList<Double> result = new ArrayList<>();
         return getOutputFromOutputLayer();
     }
 

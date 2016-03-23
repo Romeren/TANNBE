@@ -21,6 +21,9 @@ public class LinearNeuron extends ANeuron {
 
     @Override
     public void backpropagate() {
+//        System.out.println("--------BACK------------");
+//        System.out.println(this.getBackwardsConnections().size());
+//        System.out.println("Output: " + this.getOutput() + "   ERROR: " + this.error );
         for (IConnection con : this.backwardsConnections){
             con.backpropagate();
         }

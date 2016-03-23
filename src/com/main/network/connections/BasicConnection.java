@@ -1,6 +1,7 @@
 package com.main.network.connections;
 
 import com.main.network.Network.NetworkConfiguration;
+import com.main.network.neurons.ANeuron;
 import com.main.network.neurons.INeuron;
 
 /**
@@ -14,7 +15,9 @@ public class BasicConnection extends AConnection {
 
     @Override
     public void backpropagate() {
-        this.updatedWeight = this.weight + ((NetworkConfiguration.learningRate * this.end.getError()) *this.start.getOutput());
+
+        this.updatedWeight = this.weight + (NetworkConfiguration.learningRate * this.end.getError() * this.start.getOutput());
+//        System.out.println("WEIGHT: " + this.weight + "   UPDATETED: " + this.updatedWeight);
         this.start.addBackpropagationError(this.end.getError() * this.getWeight());
     }
 }

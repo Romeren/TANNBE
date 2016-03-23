@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Created by EmilSebastian on 17-03-2016.
  */
 public abstract class ANeuron implements INeuron{
-    private double input;
+    public double input;
     protected double error;
     protected double output;
     protected ArrayList<IConnection> backwardsConnections;
@@ -38,7 +38,6 @@ public abstract class ANeuron implements INeuron{
     @Override
     public void startBackpropagate(double targetValue) {
         this.error = (targetValue -this.getOutput());
-        //System.out.println("Target: " + targetValue + " Current: " + this.getOutput() + " Error: " + this.error);
     }
 
     @Override

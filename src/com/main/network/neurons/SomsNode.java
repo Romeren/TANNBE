@@ -11,10 +11,12 @@ import java.util.ArrayList;
  */
 public class SomsNode extends ANeuron implements ISOMsNode {
     private double[] weights;
+    private double[] buffer;
 
-    public SomsNode(int numberOfDimensions){
-        this.weights = new double[numberOfDimensions];
-        for (int i = 0; i < numberOfDimensions; i++){
+    public SomsNode(){
+        this.weights = new double[NetworkConfiguration.dimentionalityOfInput];
+        this.buffer = new double[weights.length];
+        for (int i = 0; i < NetworkConfiguration.dimentionalityOfInput; i++){
             this.weights[i] = RandomUtilz.getDoubleInRange(
                     NetworkConfiguration.minimumInitializedSOMWeight,
                     NetworkConfiguration.maximumInitializedSOMWeight);
@@ -22,23 +24,19 @@ public class SomsNode extends ANeuron implements ISOMsNode {
     }
 
     @Override
-    public double calculateDistance(double[] inputVector) {
-        double distance = 0;
-        for (int i = 0 ; i < this.weights.length; i++){
-            distance += (inputVector[i] - this.weights[i]) * (inputVector[i] - this.weights[i]);
-        }
-        return Math.sqrt(distance);
+    public double getDistance() {
+        return Math.sqrt(this.input);
     }
 
     @Override
-    public void adjustWeights(double[] inputVector, double learningRate, double influence) {
-        double awg = 0;
-        for(int i = 0 ; i < this.weights.length; i++){
-            double deltaWeight = (this.weights[i] - inputVector[i]) * NetworkConfiguration.learningRate *influence;
-            this.weights[i] -= deltaWeight;
-            awg += this.weights[i];
-        }
-        this.addInput(awg/this.weights.length);
+    public void adjustWeights(double inputVector, double learningRate, double influence, int weightNumber) {
+        double deltaWeight = (this.weights[weightNumber] - inputVector) * NetworkConfiguration.learningRate * influence;
+        this.weights[weightNumber] -= deltaWeight;
+    }
+
+    @Override
+    public double[] getWeights() {
+        return this.weights;
     }
 
     @Override

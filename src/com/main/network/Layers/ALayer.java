@@ -29,6 +29,7 @@ public abstract class ALayer implements ILayer {
         for (int i = 0; i < neurons.size(); i++){
             output[i] = neurons.get(i).getOutput();
         }
+
         return output;
     }
 

@@ -18,7 +18,9 @@ public class SigmaNeuron extends ANeuron {
 
     @Override
     public void backpropagate() {
-        this.error = this.getOutput() * (1-this.getOutput()) * this.error;
+
+        this.error = this.output * (1-this.output) * this.error;
+
         for (IConnection con : this.backwardsConnections){
             con.backpropagate();
         }

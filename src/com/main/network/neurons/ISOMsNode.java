@@ -3,8 +3,9 @@ package com.main.network.neurons;
 /**
  * Created by EmilSebastian on 22-03-2016.
  */
-public interface ISOMsNode {
+public interface ISOMsNode extends INeuron {
 
-    double calculateDistance(double[] inputVector);
-    void adjustWeights(double[] inputVector, double learningRate, double influence);
+    double getDistance();
+    void adjustWeights(double inputVector, double learningRate, double influence, int weightNumber);
+    double[] getWeights();
 }
