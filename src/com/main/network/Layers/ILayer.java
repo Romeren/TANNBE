@@ -5,11 +5,13 @@ import com.main.network.neurons.INeuron;
 import com.main.network.neurons.NeuronTypes;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
 
 /**
  * Created by EmilSebastian on 18-03-2016.
  */
 public interface ILayer {
+    void setExecutorService(ExecutorService pool);
     ArrayList<INeuron> getNeurons();
     void feedForward();
     double[] getOutput();

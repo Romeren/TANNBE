@@ -8,6 +8,7 @@ import com.main.network.neurons.ISOMsNode;
 import com.main.network.neurons.NeuronTypes;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by EmilSebastian on 22-03-2016.
@@ -19,8 +20,12 @@ public class SomsLayer extends ALayer {
 
     @Override
     public void feedForward() {
-        for(IConnection con : this.getNeurons().get(0).getBackwardsConnections()){
-            ((SomsConnection) con).adjustWeights();
+        if(this.pool != null) {
+            For(neurons.get(0).getBackwardsConnections(),pParameter -> ((SomsConnection)pParameter).adjustWeights());
+        }else{
+            for (IConnection con : this.getNeurons().get(0).getBackwardsConnections()) {
+                ((SomsConnection) con).adjustWeights();
+            }
         }
         super.feedForward();
     }

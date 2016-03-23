@@ -66,7 +66,7 @@ public class SomsConnection implements IConnection {
                 double r2 = radius* radius;
                 if (dist2 < r2) {
                     double influence = Math.exp(-(dist2)/(2*r2));
-                    end[x+(y*NetworkConfiguration.SOMsGridDimensions[1])].adjustWeights(
+                    end[x+(y*NetworkConfiguration.SOMsGridDimensions[0])].adjustWeights(
                             start.getOutput(),
                             NetworkConfiguration.calculateLearningRate(iteration),
                             influence,

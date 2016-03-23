@@ -2,10 +2,18 @@ package com.main.network.Layers;
 
 import com.main.network.neurons.*;
 
+import java.util.concurrent.ExecutorService;
+
 /**
  * Created by EmilSebastian on 18-03-2016.
  */
 public class LayerFactory {
+
+    public static ILayer createLayerMultithreaded(LayerTypes type, int numberOfNeurons, NeuronTypes neuronTypes, ExecutorService pool){
+        ILayer lay = createLayer(type,numberOfNeurons,neuronTypes);
+        lay.setExecutorService(pool);
+        return lay;
+    }
 
     public static ILayer createLayer(LayerTypes type, int numberOfNeurons, NeuronTypes neuronType){
         ILayer layer;

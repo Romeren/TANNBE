@@ -15,6 +15,7 @@ import org.tc33.jheatchart.HeatChart;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
 /**
@@ -55,14 +56,16 @@ public class SOMsPlot {
     public static void main(String[] args){
         NetworkConfiguration.minimumInitializedSOMWeight = 0;
         NetworkConfiguration.maximumInitializedSOMWeight = 255;
-        NetworkConfiguration.SOMsMaxNumberOfIterations = 1000;
-        Network net = new NetworkFactory()
+        NetworkConfiguration.SOMsGridDimensions[0] =30;
+        NetworkConfiguration.SOMsGridDimensions[1] =40;
+        NetworkConfiguration.SOMsMaxNumberOfIterations = 2000;
+        Network net = new NetworkFactory(8)
                 .addLayer(LayerTypes.ONE_DIMENTIONAL, NeuronTypes.LINEAR, 3)
-                .addLayer(LayerTypes.SOMSLAYER, NeuronTypes.SOMS, 100)
+                .addLayer(LayerTypes.SOMSLAYER, NeuronTypes.SOMS, 1200)
                 .build();
 
         new SOMsPlot(net.getLayer(1));
-
+        double before = System.currentTimeMillis();
         try {
             for (int i =0 ; i<NetworkConfiguration.SOMsMaxNumberOfIterations ;i++) {
                 double r = RandomUtilz.getDoubleInRange(0, 255);
@@ -75,6 +78,8 @@ public class SOMsPlot {
         } catch (InvalidNumberOfInput invalidNumberOfInput) {
             invalidNumberOfInput.printStackTrace();
         }
+        double after = System.currentTimeMillis();
+        System.out.println("Time difference: " + (after-before)/1000);
         new SOMsPlot(net.getLayer(1));
     }
 }

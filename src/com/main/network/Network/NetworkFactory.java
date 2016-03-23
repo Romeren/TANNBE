@@ -13,19 +13,33 @@ import com.main.network.neurons.NeuronTypes;
 
 import java.security.PublicKey;
 import java.util.Random;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by EmilSebastian on 21-03-2016.
  */
 public class NetworkFactory {
     private Network network = new Network();
+    private ExecutorService pool;
+
+    public NetworkFactory(){}
+    public NetworkFactory(int numberOfCPUs){
+        pool = Executors.newFixedThreadPool(numberOfCPUs);
+    }
+
 
     public Network build(){
         return this.network;
     }
 
     public NetworkFactory addLayer(LayerTypes lType, NeuronTypes nType, int numberOfNEurons){
-        network.addLayer(LayerFactory.createLayer(lType, numberOfNEurons, nType));
+        if(pool!= null){
+            network.addLayer(LayerFactory.createLayerMultithreaded(lType, numberOfNEurons, nType, pool));
+        }else {
+            network.addLayer(LayerFactory.createLayer(lType, numberOfNEurons, nType));
+        }
         if (network.layers.size() > 1 && NetworkConfiguration.isFullyConnected){
             // then connect the new layer with the previouse one
             ILayer previous = network.layers.get(network.layers.size()-2);
