@@ -56,12 +56,12 @@ public class SOMsPlot {
     public static void main(String[] args){
         NetworkConfiguration.minimumInitializedSOMWeight = 0;
         NetworkConfiguration.maximumInitializedSOMWeight = 255;
-        NetworkConfiguration.SOMsGridDimensions[0] =30;
-        NetworkConfiguration.SOMsGridDimensions[1] =40;
+        NetworkConfiguration.SOMsGridDimensions[0] =10;
+        NetworkConfiguration.SOMsGridDimensions[1] =10;
         NetworkConfiguration.SOMsMaxNumberOfIterations = 2000;
         Network net = new NetworkFactory(8)
                 .addLayer(LayerTypes.ONE_DIMENTIONAL, NeuronTypes.LINEAR, 3)
-                .addLayer(LayerTypes.SOMSLAYER, NeuronTypes.SOMS, 1200)
+                .addLayer(LayerTypes.SOMSLAYER, NeuronTypes.SOMS, 100)
                 .build();
 
         new SOMsPlot(net.getLayer(1));
