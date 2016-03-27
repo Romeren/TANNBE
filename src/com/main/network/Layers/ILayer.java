@@ -10,10 +10,12 @@ import java.util.concurrent.ExecutorService;
 /**
  * Created by EmilSebastian on 18-03-2016.
  */
-public interface ILayer {
+public interface ILayer{
     void setExecutorService(ExecutorService pool);
     ArrayList<INeuron> getNeurons();
     void feedForward();
+    void feedBackward();
+    void backpropagateRBM();
     double[] getOutput();
     void resetLayer();
     void addInputToLayer(double[] input)  throws InvalidNumberOfInput;

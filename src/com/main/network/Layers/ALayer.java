@@ -1,6 +1,7 @@
 package com.main.network.Layers;
 
 import com.main.network.Exceptions.InvalidNumberOfInput;
+import com.main.network.neurons.IBackwardsFeed;
 import com.main.network.neurons.INeuron;
 import com.sun.corba.se.spi.orb.Operation;
 
@@ -24,6 +25,32 @@ public abstract class ALayer implements ILayer {
     @Override
     public ArrayList<INeuron> getNeurons() {
         return this.neurons;
+    }
+
+    @Override
+    public void feedBackward() {
+        if(pool != null){
+            For(neurons, pParameter -> ((IBackwardsFeed) pParameter).feedBackwards());
+        }else {
+            for (INeuron n : this.neurons) {
+                if(n instanceof IBackwardsFeed) {
+                    ((IBackwardsFeed) n).feedBackwards();
+                }
+            }
+        }
+    }
+
+    @Override
+    public void backpropagateRBM() {
+        if(pool != null){
+            For(neurons, pParameter -> ((IBackwardsFeed)pParameter).unsupervizedRBM());
+        }else {
+            for (INeuron n : this.neurons) {
+                if(n instanceof IBackwardsFeed) {
+                    ((IBackwardsFeed) n).unsupervizedRBM();
+                }
+            }
+        }
     }
 
     @Override
