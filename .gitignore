@@ -11,7 +11,7 @@
 NetworkVisualizationModule/src/main/java/visualization/VisualizationTools/TestTmp.java
 NetworkVisualizationModule/target/*s
 *.png
-target/classses/*
+target/*
 
 # Sensitive or high-churn files:
 .idea/dataSources.ids
@@ -30,6 +30,7 @@ target/classses/*
 
 ## File-based project format:
 *.iws
+*.class
 
 ## Plugin-specific files:
 

@@ -3,7 +3,6 @@ package visualization.VisualizationTools;
 import com.main.network.Layers.LayerTypes;
 import com.main.network.Layers.SomsLayer;
 import com.main.network.Network.Network;
-import com.main.network.Network.NetworkConfiguration;
 import com.main.network.Network.NetworkFactory;
 import com.main.network.connections.IConnection;
 import com.main.network.neurons.INeuron;
