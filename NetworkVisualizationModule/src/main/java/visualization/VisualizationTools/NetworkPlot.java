@@ -1,21 +1,18 @@
 package visualization.VisualizationTools;
 
 import com.main.network.Layers.LayerTypes;
+import com.main.network.Layers.SomsLayer;
 import com.main.network.Network.Network;
+import com.main.network.Network.NetworkConfiguration;
 import com.main.network.Network.NetworkFactory;
 import com.main.network.connections.IConnection;
 import com.main.network.neurons.INeuron;
 import com.main.network.neurons.NeuronTypes;
 import edu.uci.ics.jung.algorithms.layout.*;
-import edu.uci.ics.jung.graph.Forest;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.SparseMultigraph;
 import edu.uci.ics.jung.graph.util.EdgeType;
 import edu.uci.ics.jung.visualization.BasicVisualizationServer;
-import org.apache.commons.collections15.Transformer;
-import org.apache.commons.collections15.functors.MapTransformer;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.JFreeChart;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,8 +25,8 @@ import java.util.Map;
  */
 public class NetworkPlot extends JFrame{
 
-    public NetworkPlot(Network net){
-        /*
+    public NetworkPlot(Network net) throws Exception {
+
         Graph<Integer, String> g = new SparseMultigraph<Integer, String>();
         // Add some vertices. From above we defined these to be type Integer.
         int numberOfLayers = net.getNumberOfLayers();
@@ -38,12 +35,14 @@ public class NetworkPlot extends JFrame{
         Map<Integer, Double> weightMap = new HashMap();
         int edgeCount = 0;
         for(int x = 0; x < numberOfLayers; x++){
+            if(net.getLayer(x) instanceof SomsLayer)
+                throw new Exception("Cannot plot SOMs networks!");
             for(int y = 0 ; y < net.getLayer(x).getNeurons().size(); y++){
                 nameMapping.put(net.getLayer(x).getNeurons().get(y), index);
                 g.addVertex(index);
                 index++;
-
                 for(IConnection con : net.getLayer(x).getNeurons().get(y).getBackwardsConnections()){
+
                     g.addEdge("Edge-" + nameMapping.get(con.getStart()).intValue() + "-"+nameMapping.get(con.getEnd()).intValue(),
                             nameMapping.get(con.getStart()).intValue(),
                             nameMapping.get(con.getEnd()).intValue(),
@@ -72,17 +71,21 @@ public class NetworkPlot extends JFrame{
         getContentPane().add(vv);
         pack();
         setVisible(true);
-        */
+
     }
 
-    /*
-            FOR TESTING SAMPLE!
-     */
+
+    //        FOR TESTING SAMPLE!
     public static void main(String[] args){
         Network net = new NetworkFactory().addLayer(LayerTypes.ONE_DIMENTIONAL, NeuronTypes.LINEAR, 1)
                 .addLayer(LayerTypes.ONE_DIMENTIONAL, NeuronTypes.LINEAR, 3)
                 .addLayer(LayerTypes.ONE_DIMENTIONAL,NeuronTypes.LINEAR,3)
                 .addLayer(LayerTypes.ONE_DIMENTIONAL, NeuronTypes.LINEAR, 1).build();
-        new NetworkPlot(net);
+
+        try {
+            new NetworkPlot(net);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

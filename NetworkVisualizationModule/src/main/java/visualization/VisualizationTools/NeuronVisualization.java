@@ -1,5 +1,5 @@
 package visualization.VisualizationTools;
-
+/*
 import com.main.network.Layers.LayerTypes;
 import com.main.network.Network.Network;
 import com.main.network.Network.NetworkFactory;
@@ -17,7 +17,7 @@ import org.jfree.data.xy.DefaultXYZDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import visualization.Utilz.JfreeChartFrame;
-
+*/
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Map;
@@ -26,8 +26,9 @@ import java.util.Map;
  * Created by EmilSebastian on 21-03-2016.
  */
 public class NeuronVisualization{
-
+/*
     public NeuronVisualization(INeuron neuron){
+
         DefaultCategoryDataset lines = new DefaultCategoryDataset();
 
         ArrayList<IConnection> compareTo = (ArrayList<IConnection>) neuron.getBackwardsConnections().clone();
@@ -79,4 +80,5 @@ public class NeuronVisualization{
 
         new NeuronVisualization(net.getLayer(1).getNeurons().get(0));
     }
+    */
 }
